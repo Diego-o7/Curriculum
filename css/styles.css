@@ -1,0 +1,612 @@
+/* ===== RESET Y BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #e5e5e0;
+    color: #2c2c2c;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* ===== MODO OSCURO ===== */
+body.dark-mode {
+    background-color: #1a1a1c;
+    color: #d2d2d7;
+    background-image: radial-gradient(circle at center, #242426 0%, #1a1a1c 100%);
+}
+
+/* ===== OFFSET PARA ANCLAJES (evita que el nav sticky tape el título) ===== */
+section[id] {
+    scroll-margin-top: 90px;
+}
+
+/* ===== SECCIONES PRINCIPALES ===== */
+.pantalla {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: fadeUp 0.6s ease-out;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== HEADER ===== */
+header {
+    text-align: center;
+    padding: 120px 20px 60px;
+}
+
+header h1 {
+    font-size: 60px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #b87333;
+    letter-spacing: -1px;
+}
+
+header p {
+    font-size: 22px;
+    color: #8c8c91;
+}
+
+body.dark-mode header p {
+    color: #a0a0a8;
+}
+
+/* ===== NAVEGACIÓN STICKY ===== */
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: linear-gradient(to bottom, #3b332e, #26211e);
+    border-bottom: 2px solid #b87333;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+body:not(.dark-mode) nav {
+    background: linear-gradient(to bottom, #f0ebd8, #e3d5ca);
+    border-bottom: 2px solid #8c564b;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: #e0e0e0;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease, transform 0.2s ease;
+    padding: 8px 4px;
+}
+
+body:not(.dark-mode) nav a {
+    color: #333;
+}
+
+nav a:hover {
+    color: #d4af37;
+    transform: translateY(-2px);
+}
+
+/* ===== TÍTULOS DE SECCIÓN ===== */
+section h2 {
+    font-size: 42px;
+    margin-bottom: 50px;
+    text-align: center;
+    color: #b87333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+/* ===== SOBRE MÍ - HEXÁGONO ===== */
+.hex-wrapper {
+    width: 250px;
+    height: 250px;
+    background: linear-gradient(135deg, #b87333 0%, #d4af37 50%, #8c564b 100%);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 40px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.hex-wrapper:hover {
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 8px rgba(180, 115, 51, 0.5));
+}
+
+.hex-img {
+    width: 240px;
+    height: 240px;
+    object-fit: cover;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background-color: #2c2c2c;
+}
+
+.texto-destacado p {
+    font-size: 20px;
+    line-height: 1.8;
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto 20px;
+}
+
+/* ===== TARJETA DE EDUCACIÓN ===== */
+.tarjeta-educacion {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background: linear-gradient(145deg, #382c24, #261e18);
+    border: 1px solid #5c4738;
+    color: #ffffff;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-educacion:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 12px 28px rgba(0, 0, 0, 0.5);
+}
+
+.icono {
+    font-size: 48px;
+}
+
+/* ===== GRIDS ===== */
+.grid-habilidades,
+.grid-proyectos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+/* ===== TARJETAS DE HABILIDADES Y PROYECTOS ===== */
+.card-skill,
+article {
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(2px);
+}
+
+.card-skill:hover,
+article:hover {
+    transform: translateY(-8px);
+    box-shadow: 0px 12px 28px rgba(0, 0, 0, 0.5);
+}
+
+.card-skill dt,
+article h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    margin-top: 0;
+    color: #ffffff;
+}
+
+.card-skill dd,
+article p {
+    font-size: 17px;
+    line-height: 1.7;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* ===== COLORES DE TARJETAS (estilo personal) ===== */
+.card-emerald {
+    background-color: #223c30;
+    border-top: 4px solid #437a5f;
+}
+.card-cobalt {
+    background-color: #1e2a38;
+    border-top: 4px solid #3c6591;
+}
+.card-terracotta {
+    background-color: #3d241d;
+    border-top: 4px solid #8f4d38;
+}
+.card-amber {
+    background-color: #40321a;
+    border-top: 4px solid #a37f37;
+}
+.card-amethyst {
+    background-color: #2b2136;
+    border-top: 4px solid #6c538a;
+}
+.card-slate {
+    background-color: #2a2e33;
+    border-top: 4px solid #5a6675;
+}
+
+/* ===== MODO CLARO: AJUSTE DE SOMBRAS EN TARJETAS ===== */
+body:not(.dark-mode) .card-skill,
+body:not(.dark-mode) article {
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+    backdrop-filter: none;
+}
+
+body:not(.dark-mode) .card-skill dd,
+body:not(.dark-mode) article p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ===== FORMULARIO ===== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #242426;
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+body:not(.dark-mode) form {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #b87333;
+}
+
+input,
+textarea {
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: #1a1a1c;
+    color: #e0e0e0;
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body:not(.dark-mode) input,
+body:not(.dark-mode) textarea {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #b87333;
+    box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.2);
+}
+
+/* ===== BOTONES ===== */
+button {
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to right, #b87333, #8c564b);
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: opacity 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #141415;
+    border-top: 1px solid #333;
+    margin-top: 40px;
+}
+
+body:not(.dark-mode) footer {
+    background-color: #e3d5ca;
+    border-top: 1px solid #d4c1b3;
+}
+
+.redes {
+    margin-top: 20px;
+}
+
+footer a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #b87333;
+    font-weight: 600;
+    transition: color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+footer a:hover {
+    color: #d4af37;
+    transform: translateY(-2px);
+}
+
+/* ===== SWITCH (BOTÓN DE TEMA) ===== */
+.switch {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 70px;
+    height: 36px;
+    background-color: #4a3b32;
+    border-radius: 36px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    z-index: 2000;
+    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+body:not(.dark-mode) .switch {
+    background-color: #d9d9d9;
+    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.slider {
+    width: 28px;
+    height: 28px;
+    background-color: #1a1a1c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.4s ease, background-color 0.3s ease;
+}
+
+body:not(.dark-mode) .slider {
+    background-color: white;
+}
+
+.dark-mode .slider {
+    transform: translateX(34px);
+    background-color: #d4af37;
+}
+
+/* ===== ACCESIBILIDAD: FOCO VISIBLE ===== */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+.switch:focus-visible {
+    outline: 3px solid #d4af37;
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    html {
+        font-size: 15px;
+    }
+    
+    header h1 {
+        font-size: 42px;
+    }
+    
+    section h2 {
+        font-size: 32px;
+        margin-bottom: 35px;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    nav a {
+        display: inline-block;
+        padding: 8px 16px;
+    }
+    
+    .pantalla {
+        padding: 60px 20px;
+    }
+    
+    .hex-wrapper {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .hex-img {
+        width: 192px;
+        height: 192px;
+    }
+    
+    .texto-destacado p {
+        font-size: 1.1rem;
+    }
+    
+    .tarjeta-educacion {
+        font-size: 18px;
+        padding: 25px;
+        flex-direction: column;
+    }
+    
+    .grid-habilidades,
+    .grid-proyectos {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .card-skill,
+    article {
+        padding: 25px;
+    }
+    
+    .card-skill dt,
+    article h3 {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 80px 20px 40px;
+    }
+    
+    header h1 {
+        font-size: 32px;
+    }
+    
+    header p {
+        font-size: 18px;
+    }
+    
+    section h2 {
+        font-size: 28px;
+    }
+    
+    .pantalla {
+        padding: 40px 16px;
+    }
+    
+    form {
+        padding: 25px 20px;
+        gap: 20px;
+    }
+    
+    input,
+    textarea,
+    button {
+        padding: 12px;
+    }
+    
+    button {
+        font-size: 16px;
+    }
+    
+    .card-skill dt,
+    article h3 {
+        font-size: 20px;
+    }
+    
+    .card-skill dd,
+    article p {
+        font-size: 15px;
+    }
+    
+    .icono {
+        font-size: 36px;
+    }
+    
+    footer {
+        padding: 40px 20px;
+    }
+    
+    footer a {
+        margin: 0 10px;
+        font-size: 14px;
+    }
+}
+
+/* ===== UTILIDADES ADICIONALES ===== */
+/* Mejora la legibilidad de enlaces internos */
+a[href^="#"] {
+    scroll-behavior: smooth;
+}
+
+/* Evita que el contenido se desplace bruscamente */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Estilo para scrollbar personalizado (opcional) */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #2c2c2c;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #b87333;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #d4af37;
+}
+
+body:not(.dark-mode) ::-webkit-scrollbar-track {
+    background: #e0d6cc;
+}
+
+body:not(.dark-mode) ::-webkit-scrollbar-thumb {
+    background: #8c564b;
+}
