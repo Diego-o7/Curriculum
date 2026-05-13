@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Diego Chavez | Ingeniería en Sistemas Electrónicos Inteligentes</title>
+    <!-- Fuentes modernas y reset ligero -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f1f5f9;
+            color: #0f172a;
+            transition: background 0.3s ease, color 0.2s ease;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* modo oscuro */
+        body.dark-mode {
+            background: #0a0c10;
+            color: #e2e8f0;
+        }
+
+        /* contenedor principal ancho máximo */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ===== BOTÓN TEMA ===== */
+        .theme-switch {
+            position: fixed;
+            top: 1.5rem;
+            right: 2rem;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            border-radius: 60px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 1.6rem;
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.25);
+        }
+        body.dark-mode .theme-switch {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        /* header hero */
+        .hero {
+            text-align: center;
+            padding: 5rem 0 3rem;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 0 0 2rem 2rem;
+            margin-bottom: 2rem;
+        }
+        body.dark-mode .hero {
+            background: linear-gradient(145deg, #0f172a 0%, #111827 100%);
+        }
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-top: 0.8rem;
+            color: #1e293b;
+            font-weight: 400;
+        }
+        body.dark-mode .hero p {
+            color: #cbd5e1;
+        }
+
+        /* nav moderno */
+        .navbar {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 60px;
+            padding: 0.6rem 1.8rem;
+            margin: 1rem auto 2rem auto;
+            display: inline-flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        body.dark-mode .navbar {
+            background: rgba(15,23,42,0.85);
+            border-color: #334155;
+        }
+        .navbar a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #1e293b;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            transition: 0.2s;
+        }
+        body.dark-mode .navbar a {
+            color: #e2e8f0;
+        }
+        .navbar a:hover {
+            background: #2563eb;
+            color: white;
+        }
+        .nav-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* secciones generales */
+        section {
+            margin: 4rem 0;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            border-left: 6px solid #2563eb;
+            padding-left: 1.2rem;
+        }
+
+        /* acerca de (diseño dual) */
+        .about-grid {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .about-image {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            justify-content: center;
+        }
+        .hexagon {
+            width: 220px;
+            height: 250px;
+            background: linear-gradient(145deg, #2563eb, #7c3aed);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.2);
+        }
+        .hexagon:hover {
+            transform: scale(1.02);
+        }
+        .hexagon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        .about-text {
+            flex: 2;
+        }
+        .about-text p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+        .highlight {
+            background: rgba(37,99,235,0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        /* tarjeta educación minimal */
+        .edu-card {
+            background: white;
+            border-radius: 28px;
+            padding: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+        body.dark-mode .edu-card {
+            background: #111827;
+            border-color: #1e293b;
+        }
+        .edu-icon {
+            font-size: 3rem;
+        }
+        .edu-card p {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* grid habilidades (moderno cards) */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+        .skill-card {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.5rem;
+            transition: all 0.25s;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.02);
+        }
+        body.dark-mode .skill-card {
+            background: #0f172a;
+            border-color: #1e293b;
+        }
+        .skill-card:hover {
+            transform: translateY(-6px);
+            border-color: #2563eb50;
+            box-shadow: 0 18px 30px -12px rgba(0,0,0,0.1);
+        }
+        .skill-card dt {
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .skill-card dd {
+            color: #334155;
+            line-height: 1.5;
+        }
+        body.dark-mode .skill-card dd {
+            color: #cbd5e6;
+        }
+
+        /* proyectos estilo masonry / moderno */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .project-item {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: 0.2s;
+            border: 1px solid #eef2ff;
+            box-shadow: 0 10px 15px -6px rgba(0,0,0,0.05);
+        }
+        body.dark-mode .project-item {
+            background: #0f172a;
+            border-color: #1e293b;
+        }
+        .project-header {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 1.2rem;
+            color: white;
+        }
+        body.dark-mode .project-header {
+            background: linear-gradient(135deg, #0f172a, #020617);
+        }
+        .project-header h3 {
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+        .project-content {
+            padding: 1.5rem;
+        }
+        .project-content p {
+            margin-bottom: 1rem;
+        }
+        .chip {
+            display: inline-block;
+            background: #e2e8f0;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        body.dark-mode .chip {
+            background: #334155;
+            color: #f1f5f9;
+        }
+
+        /* formulario elegante */
+        .contact-form {
+            background: white;
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+        body.dark-mode .contact-form {
+            background: #111827;
+            border-color: #1e293b;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border-radius: 1.2rem;
+            border: 1px solid #cbd5e1;
+            background: #fefefe;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+        body.dark-mode input, body.dark-mode textarea {
+            background: #1e293b;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.85rem 2rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        button:hover {
+            background: #1d4ed8;
+            transform: scale(0.98);
+        }
+
+        /* footer */
+        .footer {
+            margin-top: 4rem;
+            padding: 2rem 0;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        body.dark-mode .footer {
+            border-top-color: #1e293b;
+        }
+        .social-links a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 0.8rem;
+        }
+        body.dark-mode .social-links a {
+            color: #60a5fa;
+        }
+
+        /* ajustes responsive */
+        @media (max-width: 760px) {
+            .container {
+                padding: 0 1.2rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .navbar {
+                padding: 0.4rem 1rem;
+                gap: 0.3rem;
+            }
+            .navbar a {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.7rem;
+            }
+            .about-grid {
+                flex-direction: column;
+                text-align: center;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* micro animaciones */
+        .toast-msg {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0f172a;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+            font-weight: 500;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+        }
+        body.dark-mode .toast-msg {
+            background: #1e293b;
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-switch" id="themeToggle" aria-label="Cambiar tema">
+        🌙
+    </div>
+
+    <div class="container">
+        <!-- Hero header -->
+        <div class="hero">
+            <h1>Diego Chavez Martinez</h1>
+            <p>Ingeniería en Sistemas Electrónicos Inteligentes | Innovación, IA & IoT</p>
+        </div>
+
+        <!-- Navegación centrada -->
+        <div class="nav-wrapper">
+            <div class="navbar">
+                <a href="#sobre-mi">Sobre mí</a>
+                <a href="#educacion">Educación</a>
+                <a href="#habilidades">Habilidades</a>
+                <a href="#proyectos">Proyectos</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+        </div>
+
+        <main>
+            <!-- Sobre mí rediseñado -->
+            <section id="sobre-mi">
+                <h2 class="section-title">Sobre mí</h2>
+                <div class="about-grid">
+                    <div class="about-image">
+                        <div class="hexagon">
+                            <!-- Imagen de perfil, si no existe se ve un placeholder elegante -->
+                            <img src="img/perfil.jpg" alt="Diego Chavez" onerror="this.src='https://ui-avatars.com/api/?background=2563eb&color=fff&name=Diego+Chavez&size=200'">
+                        </div>
+                    </div>
+                    <div class="about-text">
+                        <p>Soy estudiante apasionado de Ingeniería en Sistemas Electrónicos Inteligentes, con enfoque en automatización, inteligencia artificial y sistemas embebidos. Desarrollo soluciones que integran hardware y software para resolver problemas del mundo real.</p>
+                        <p>Actualmente lidero un emprendimiento de importación y análisis de inversiones, combinando la visión tecnológica con estrategias de negocio. Me motiva la optimización continua, el aprendizaje constante y la construcción de proyectos que fusionen electrónica, machine learning y desarrollo web.</p>
+                        
+                    </div>
+                </div>
+            </section>
+
+            <!-- Educación moderna -->
+            <section id="educacion">
+                <h2 class="section-title">Formación</h2>
+                <div class="edu-card">
+                    <div class="edu-icon">🎓</div>
+                    <p><strong>Ingeniería en Sistemas Electrónicos Inteligentes</strong> — Universidad (2022 - Actualidad) <br> <span style="font-size:0.9rem; opacity:0.8;">Especialización en IA embebida, IoT y automatización avanzada.</span></p>
+                </div>
+            </section>
+
+            <!-- Habilidades: más estructurado y profesional -->
+            <section id="habilidades">
+                <h2 class="section-title">Competencias técnicas</h2>
+                <div class="skills-grid">
+                    <div class="skill-card"><dt>💻 Lenguajes de Programación</dt><dd>C, C++, Python, MATLAB, HTML, CSS, JavaScript – desarrollo de sistemas embebidos, scripts de análisis y full stack básico.</dd></div>
+                    <div class="skill-card"><dt>🌐 Desarrollo Web</dt><dd>Flask, HTML5, CSS3, JavaScript. Creación de dashboards, servidores locales y visualización de datos en tiempo real.</dd></div>
+                    <div class="skill-card"><dt>📡 Electrónica & IoT</dt><dd>ESP32, ADC, PWM, NeoPixel, sensores, comunicación serial y diseño de sistemas de monitoreo remoto.</dd></div>
+                    <div class="skill-card"><dt>🧠 Machine Learning</dt><dd>PyTorch, redes neuronales, preprocesamiento de datos, validación y modelos predictivos aplicados a salud y señales.</dd></div>
+                    <div class="skill-card"><dt>🎨 Diseño y Edición</dt><dd>Edición digital, diagramación técnica, maquetación de presentaciones y prototipado visual.</dd></div>
+                    <div class="skill-card"><dt>🛠️ Herramientas</dt><dd>Git, GitHub, VS Code, Google Colab, MATLAB, Office 365. Gestión de versiones y documentación colaborativa.</dd></div>
+                </div>
+            </section>
+
+            <!-- Proyectos con diseño más atractivo -->
+            <section id="proyectos">
+                <h2 class="section-title">Proyectos destacados</h2>
+                <div class="projects-grid">
+                    <div class="project-item">
+                        <div class="project-header"><h3>📡 Cliente-Servidor con ESP32</h3></div>
+                        <div class="project-content"><p>Sistema completo de monitoreo que envía datos desde sensores (temperatura, humedad, etc) mediante ESP32 a un servidor Flask. Visualización en tiempo real con gráficas y alertas configurables.</p><span class="chip">IoT</span> <span class="chip">Flask</span></div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-header"><h3>🧬 Predicción de Diabetes</h3></div>
+                        <div class="project-content"><p>Red neuronal profunda con PyTorch que analiza métricas médicas para predecir riesgo de diabetes. Incluye normalización, entrenamiento y evaluación con exactitud del 85% en validación.</p><span class="chip">Machine Learning</span><span class="chip">PyTorch</span></div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-header"><h3>⚠️ Monitoreo ADC + Alarmas</h3></div>
+                        <div class="project-content"><p>Utilización del ADC del ESP32 para lectura de sensores analógicos, sistema de alarma visual con LEDs y control PWM. Gráficas locales en tiempo real mediante WebSocket liviano.</p><span class="chip">Embedded</span><span class="chip">ESP32</span></div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-header"><h3>📦 Emprendimiento de Importación</h3></div>
+                        <div class="project-content"><p>Gestión integral de negocio propio de productos importados: análisis de demanda, control de inventarios, estrategias de expansión y ROI. Aplicación de principios de optimización y datos.</p><span class="chip">Negocios</span><span class="chip">Data-Driven</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contacto con feedback dinámico -->
+            <section id="contacto">
+                <h2 class="section-title">Conversemos</h2>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="nombre">Nombre completo</label>
+                            <input type="text" id="nombre" placeholder="Diego Martinez" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" placeholder="diego@ejemplo.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" rows="4" placeholder="¿Proyecto, colaboración o asesoría? Escríbeme..."></textarea>
+                        </div>
+                        <button type="submit" id="submitBtn">Enviar mensaje ✉️</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© 2026 Diego Chavez Martinez — Ingeniero en formación, creador de soluciones</p>
+            <div class="social-links">
+                <a href="https://github.com/Diego-o7" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/dcm-undefined-968692257/" target="_blank">LinkedIn</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // ---- Dark mode mejorado + persistencia ----
+        const themeBtn = document.getElementById('themeToggle');
+        const body = document.body;
+        const iconSpan = document.getElementById('themeToggle'); // mismo div
+
+        function setTheme(isDark) {
+            if (isDark) {
+                body.classList.add('dark-mode');
+                iconSpan.innerHTML = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.remove('dark-mode');
+                iconSpan.innerHTML = '🌙';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            setTheme(true);
+        } else if (savedTheme === 'light') {
+            setTheme(false);
+        } else {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            setTheme(prefersDark);
+        }
+
+        themeBtn.addEventListener('click', () => {
+            const isDark = body.classList.contains('dark-mode');
+            setTheme(!isDark);
+        });
+
+        // ---- Formulario con alerta suave ----
+        const form = document.getElementById('contactForm');
+        const nombreInput = document.getElementById('nombre');
+        const emailInput = document.getElementById('email');
+        const mensajeInput = document.getElementById('mensaje');
+
+        function showToast(message, isError = false) {
+            const existingToast = document.querySelector('.toast-msg');
+            if (existingToast) existingToast.remove();
+            const toast = document.createElement('div');
+            toast.className = 'toast-msg';
+            toast.textContent = message;
+            if (isError) {
+                toast.style.background = '#b91c1c';
+                toast.style.color = 'white';
+            } else {
+                toast.style.background = '#0f172a';
+            }
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 2800);
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nombre = nombreInput.value.trim();
+            const email = emailInput.value.trim();
+            const mensaje = mensajeInput.value.trim();
+
+            if (!nombre || !email || !mensaje) {
+                showToast('⚠️ Por favor completa todos los campos.', true);
+                return;
+            }
+            if (!email.includes('@') || !email.includes('.')) {
+                showToast('📧 Ingresa un correo válido.', true);
+                return;
+            }
+
+            // simulación de envío exitoso
+            showToast(`✨ Gracias ${nombre}, tu mensaje ha sido enviado. Pronto me pondré en contacto.`, false);
+            form.reset();
+        });
+        
+        // navegación suave al hacer clic en los enlaces del navbar
+        document.querySelectorAll('.navbar a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetEl = document.getElementById(targetId);
+                if (targetEl) {
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // efecto para los enlaces del footer (no son smooth por defecto pero lo aplicamos)
+        const footerLinks = document.querySelectorAll('.social-links a');
+        footerLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // solo prevent si es interno? los links son externos, no interferimos
+                // dejamos que abran en nueva pestaña por target blank
+            });
+        });
+    </script>
+</body>
+</html>
